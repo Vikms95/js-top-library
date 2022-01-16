@@ -7,7 +7,7 @@ const donQuijote = new Book("Don Quijote","Cervantes","785","unread");
 
 let myLibrary = [theHobbit,harryPotter,donQuijote];
 
-displayExistingLibrary(myLibrary);
+updateExistingLibrary(myLibrary);
 addEventListenerNewButton();
 
 function Book(title, author, pages, readState) {
@@ -35,19 +35,33 @@ function addBookToLibrary(){
     return book;
 }
 
-function displayExistingLibrary(myLibrary){
+function removeBookFromLibrary(){
+
+}
+
+function updateExistingLibrary(myLibrary){
     myLibrary.forEach(book => {
         const div = cardsContainerReference.appendChild(document.createElement("div"));
         div.classList.add("book")
         div.textContent = book.displayBookInfo();
+
+        const button = div.appendChild(document.createElement("button"));
+        button.classList.add("remove-button");
+        button.textContent = "Remove book"
     });
 }
 
 function addEventListenerNewButton(){
     newBookButtonReference.addEventListener("click", () => {
         const bookToAdd = addBookToLibrary()
+       
         const div = cardsContainerReference.appendChild(document.createElement("div"));
         div.classList.add("book");
         div.textContent = bookToAdd.displayBookInfo();
+
+        const button = div.appendChild(document.createElement("button"));
+        button.classList.add("remove-button");
+        button.textContent = "Remove book"
+        
     });
 }

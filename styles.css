@@ -17,8 +17,16 @@ body{
 }
 
 .book{
+    gap: 10px;
     border: solid 1px black;
     max-height: 200px;
     max-width: 200px;
     padding: 30px;
+
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.remove-button{
+    align-self: center;
 }
