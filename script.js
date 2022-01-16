@@ -1,11 +1,11 @@
 const cardsContainerReference = document.querySelector(".cards-container");
 const newBookButtonReference = document.querySelector(".new-book");
 
-// const theHobbit = new Book("Hobbit","Tolkien","800","unread");
-// const harryPotter = new Book("Harry Potter","Rowling","310","read");
-// const donQuijote = new Book("Don Quijote","Cervantes","785","unread");
+const theHobbit = new Book("Hobbit","Tolkien","800","unread");
+const harryPotter = new Book("Harry Potter","Rowling","310","read");
+const donQuijote = new Book("Don Quijote","Cervantes","785","unread");
 
-let myLibrary = [];
+let myLibrary = [theHobbit,harryPotter,donQuijote];
 
 updateExistingLibrary(myLibrary);
 addEventListenerNewButton();
@@ -30,10 +30,8 @@ function updateExistingLibrary(myLibrary){
         const div = cardsContainerReference.appendChild(document.createElement("div"));
         div.classList.add("book")
         div.textContent = book.displayBookInfo();
-
-        const button = div.appendChild(document.createElement("button"));
-        button.classList.add("remove-button");
-        button.textContent = "Remove book"
+        addReadButton(div,book);
+        addRemoveButton(div);
     });
 }
 
@@ -48,7 +46,35 @@ function addBookToLibrary(){
     return book;
 }
 
-function removeBookFromLibrary(){
+function displayNewBook(bookToAdd){
+    const div = cardsContainerReference.appendChild(document.createElement("div"));
+    div.classList.add("book");
+    div.textContent = bookToAdd.displayBookInfo();
+
+    addReadButton(div,bookToAdd);
+    addRemoveButton(div);
+}
+
+function addReadButton(div,book){
+    const readButton = div.appendChild(document.createElement("button"));
+    readButton.classList.add("read-button");
+    readButton.textContent = book.readState;
+    readButton.addEventListener("click", () => {
+    if(readButton.textContent === "Unread"){
+        readButton.textContent = "Read";
+    }else{
+        readButton.textContent = "Unread"
+    } 
+    })
+}
+
+function addRemoveButton(div){
+    const removeButton = div.appendChild(document.createElement("button"));
+    removeButton.classList.add("remove-button");
+    removeButton.textContent = "Remove book"
+    removeButton.addEventListener("click", () => {
+        removeButton.parentElement.remove();
+    })  
 }
 
 function addEventListenerNewButton(){
@@ -56,29 +82,4 @@ function addEventListenerNewButton(){
         const bookToAdd = addBookToLibrary()
         displayNewBook(bookToAdd);
     });
-}
-
-function displayNewBook(bookToAdd){
-    const div = cardsContainerReference.appendChild(document.createElement("div"));
-    div.classList.add("book");
-    div.textContent = bookToAdd.displayBookInfo();
-
-    const readButton = div.appendChild(document.createElement("button"));
-    readButton.classList.add("read-button");
-    readButton.textContent = bookToAdd.readState;
-    readButton.addEventListener("click", () => {
-        if(readButton.textContent === "Unread"){
-            readButton.textContent = "Read";
-        }else{
-            readButton.textContent = "Unread"
-        }
-        
-    })
-
-    const removeButton = div.appendChild(document.createElement("button"));
-    removeButton.classList.add("remove-button");
-    removeButton.textContent = "Remove book";
-    removeButton.addEventListener("click", () => {
-        removeButton.parentElement.remove();
-    })  
 }
