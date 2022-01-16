@@ -5,10 +5,9 @@ const theHobbit = new Book("Hobbit","Tolkien","800","unread");
 const harryPotter = new Book("Harry Potter","Rowling","310","read");
 const donQuijote = new Book("Don Quijote","Cervantes","785","unread");
 
-
 let myLibrary = [theHobbit,harryPotter,donQuijote];
 
-displayLibrary(myLibrary);
+displayExistingLibrary(myLibrary);
 addEventListenerNewButton();
 
 function Book(title, author, pages, readState) {
@@ -32,11 +31,11 @@ function addBookToLibrary(){
     const bookReadState = window.prompt("Have you finished this book?: ") ;
 
     const book = new Book(bookTitle,bookAuthor,bookPages,bookReadState)
-
     myLibrary.push(book);
+    return book;
 }
 
-function displayLibrary(myLibrary){
+function displayExistingLibrary(myLibrary){
     myLibrary.forEach(book => {
         const div = cardsContainerReference.appendChild(document.createElement("div"));
         div.classList.add("book")
@@ -45,5 +44,10 @@ function displayLibrary(myLibrary){
 }
 
 function addEventListenerNewButton(){
-    newBookButtonReference.addEventListener("click", addBookToLibrary);
+    newBookButtonReference.addEventListener("click", () => {
+        const bookToAdd = addBookToLibrary()
+        const div = cardsContainerReference.appendChild(document.createElement("div"));
+        div.classList.add("book");
+        div.textContent = bookToAdd.displayBookInfo();
+    });
 }
