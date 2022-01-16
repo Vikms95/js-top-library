@@ -10,8 +10,7 @@ let myLibrary = [theHobbit,harryPotter,donQuijote];
 updateExistingLibrary(myLibrary);
 addEventListenerNewButton();
 
-function Book(title, author, pages, readState) {
-    
+function Book(title, author, pages, readState){   
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -20,22 +19,37 @@ function Book(title, author, pages, readState) {
         return this.title 
                 + " by " + this.author 
                 + ", has " + this.pages + " pages, " 
-                + " and right now it's state is " + this.readState
+                + " and right now it's state is: "
 
     } 
-}
+};
 
 function updateExistingLibrary(myLibrary){
-    myLibrary.forEach(book => {
-        const div = cardsContainerReference.appendChild(document.createElement("div"));
-        div.classList.add("book")
-        div.textContent = book.displayBookInfo();
-        addReadButton(div,book);
-        addRemoveButton(div);
-    });
-}
+    let div;
 
-function addBookToLibrary(){
+    if(Array.isArray(myLibrary)){
+        myLibrary.forEach(book => {
+            div = addBookToDiv(book);
+            addReadButton(div,book);
+            addRemoveButton(div);
+        })
+    }
+    else
+    {
+        div = addBookToDiv(myLibrary);
+        addReadButton(div,myLibrary);
+        addRemoveButton(div);
+    };
+};
+
+function addEventListenerNewButton(){
+    newBookButtonReference.addEventListener("click", () => {
+        const bookToAdd = addBookToLibraryList()
+        updateExistingLibrary(bookToAdd);
+    });
+};
+
+function addBookToLibraryList(){
     const bookTitle = window.prompt("Enter the book's name: ");
     const bookAuthor = window.prompt("Enter book's author: ");
     const bookPages = window.prompt("Enter book's number of pages: ");
@@ -44,29 +58,29 @@ function addBookToLibrary(){
     const book = new Book(bookTitle,bookAuthor,bookPages,bookReadState)
     myLibrary.push(book);
     return book;
-}
+};
 
-function displayNewBook(bookToAdd){
+function addBookToDiv(book){
     const div = cardsContainerReference.appendChild(document.createElement("div"));
-    div.classList.add("book");
-    div.textContent = bookToAdd.displayBookInfo();
-
-    addReadButton(div,bookToAdd);
-    addRemoveButton(div);
-}
+    div.classList.add("book")
+    div.textContent = book.displayBookInfo();
+    return div;
+};
 
 function addReadButton(div,book){
     const readButton = div.appendChild(document.createElement("button"));
     readButton.classList.add("read-button");
     readButton.textContent = book.readState;
     readButton.addEventListener("click", () => {
-    if(readButton.textContent === "Unread"){
-        readButton.textContent = "Read";
+    if(readButton.textContent === "unread"){
+        readButton.textContent = "read";
+        readButton.style.color = "green"
     }else{
-        readButton.textContent = "Unread"
+        readButton.textContent = "unread"
+        readButton.style.color = "red"
     } 
     })
-}
+};
 
 function addRemoveButton(div){
     const removeButton = div.appendChild(document.createElement("button"));
@@ -75,11 +89,4 @@ function addRemoveButton(div){
     removeButton.addEventListener("click", () => {
         removeButton.parentElement.remove();
     })  
-}
-
-function addEventListenerNewButton(){
-    newBookButtonReference.addEventListener("click", () => {
-        const bookToAdd = addBookToLibrary()
-        displayNewBook(bookToAdd);
-    });
-}
+};
