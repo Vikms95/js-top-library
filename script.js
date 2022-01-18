@@ -75,6 +75,7 @@ function updateExistingLibrary(myLibrary){
 function addEventListenerNewButton(){
     newBookButtonReference.addEventListener("click", () => {
         const bookToAdd = addBookToLibraryList();
+        if(bookToAdd === null) return;
         updateExistingLibrary(bookToAdd);
     });
 };
@@ -95,9 +96,13 @@ function isInputValid (bookPages,bookReadState){
 
 function addBookToLibraryList(){
     const bookTitle = window.prompt("Enter the book's name: ");
+    if(bookTitle === null) return null;
     const bookAuthor = window.prompt("Enter the book's author: ");
+    if(bookAuthor === null) return null;
     const bookPages = window.prompt("Enter the book's number of pages: ");
+    if(bookPages === null) return null;
     const bookReadState = window.prompt("Have you finished this book? (Valid values => read/unread) ");
+    if(bookReadState === null) return null;
 
     if(isInputValid(bookPages,bookReadState)){
 		const book = new Book(bookTitle,bookAuthor,bookPages,bookReadState);
