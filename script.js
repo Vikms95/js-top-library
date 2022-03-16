@@ -74,48 +74,46 @@ function updateExistingLibrary(myLibrary){
 
 function addEventListenerNewButton(){
     newBookButtonReference.addEventListener("click", () => {
-        const bookToAdd = addBookToLibraryList();
-        if(bookToAdd === null) return;
-        updateExistingLibrary(bookToAdd);
+        const formDiv = document.querySelector('form')
+        formDiv.classList.toggle('active')
+        // const bookToAdd = addBookToLibraryList();
+        // if(bookToAdd === null) return;
+        // updateExistingLibrary(bookToAdd);
     });
 };
 
-function isInputValid (bookPages,bookReadState){
-	if (isNaN(parseInt(bookPages))){
-		alert("Number of pages should be a number!");
-		return false;
-	}
-	else if(bookReadState.toLowerCase() !== "unread" && bookReadState.toLowerCase() !== "read"){
-		alert("Valid values are 'read' or 'unread'.");
-		return false;
-	}
-	else{
-		return true;
-	}
+function addEventListenerAddBook(){
+  const submitButton = document.querySelector('.form-button')
+  submitButton.addEventListener('click',()=>{
+    const bookTitle = document.getElementById('title').value
+    const bookAuthor = document.getElementById('author').value
+    const bookPages = document.getElementById('pages').value
+    const bookReadState = 'Read'
+    const bookToAdd = addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState)
+    updateExistingLibrary(bookToAdd)
+  })  
+}
+
+function addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState){
+  const book = new Book(bookTitle,bookAuthor,bookPages,bookReadState);
+  myLibrary.push(book);
+  return book;
 };
 
-function addBookToLibraryList(){
-    const hi = document.querySelector('form')
-    hi.classList.toggle('active')
-    const bookTitle = window.prompt("Enter the book's name: ");
-    if(bookTitle === null) return null;
-    const bookAuthor = window.prompt("Enter the book's author: ");
-    if(bookAuthor === null) return null;
-    const bookPages = window.prompt("Enter the book's number of pages: ");
-    if(bookPages === null) return null;
-    const bookReadState = window.prompt("Have you finished this book? (Valid values => read/unread) ");
-    if(bookReadState === null) return null;
-
-    if(isInputValid(bookPages,bookReadState)){
-		const book = new Book(bookTitle,bookAuthor,bookPages,bookReadState);
-		myLibrary.push(book);
-		return book;
-	}
-	else{
-		addBookToLibraryList();
-	}
-};
-
+// function isInputValid (bookPages,bookReadState){
+// 	if (isNaN(parseInt(bookPages))){
+// 		alert("Number of pages should be a number!");
+// 		return false;
+// 	}
+// 	else if(bookReadState.toLowerCase() !== "unread" && bookReadState.toLowerCase() !== "read"){
+// 		alert("Valid values are 'read' or 'unread'.");
+// 		return false;
+// 	}
+// 	else{
+  // 		return true;
+  // 	}
+  // };
+  
 function addBookToDiv(book){
     const div = cardsContainerReference.appendChild(document.createElement("div"));
     div.classList.add("book");

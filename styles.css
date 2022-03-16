@@ -26,7 +26,7 @@ form.active{
   display: grid;
 }
 
-.section,button[type="submit"]{
+.section,button[type="button"]{
   display: flex;
   flex-direction: column;
   justify-content: center;

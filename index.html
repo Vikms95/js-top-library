@@ -16,7 +16,7 @@
 </head>
 <body>
   
-    <form action="post">
+    <form>
       <div class="section">
         <label for="title">Title</label>
         <input required type="text" id="title" name="title" minlength="1" maxlength="30" >
@@ -31,10 +31,12 @@
       </div>
       <div class="section radio"> 
         <label for="read-state">Read?</label>
-        <input type="checkbox" id="read-state" name="read-state">
+        <input type="checkbox" id="read-state" name="read-state" >
       </div>
 
-      <div class="button-wrapper"><button type="submit">Add book</button></div>
+      <div class="button-wrapper">
+        <button class="form-button" type="button">Add book</button>
+      </div>
     </form>
 
     <div class="header">
