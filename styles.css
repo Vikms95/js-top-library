@@ -6,6 +6,23 @@ body{
     flex-flow: column;
     justify-content: center;
     align-items: center;  
+
+    position: relative;
+}
+
+.add-book-form{
+  display: none;
+  position: absolute;
+  right: auto;
+  left: auto;
+
+  background-color:rgb(228, 245, 199) ;
+  border: .5rem solid black;
+
+}
+
+.add-book-form.active{
+  display: block;
 }
 
 .header{

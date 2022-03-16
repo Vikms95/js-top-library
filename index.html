@@ -15,6 +15,25 @@
     <title>Document</title>
 </head>
 <body>
+  
+  <div class="add-book-form">
+    <form action="post">
+      <label for="title">Title</label>
+      <input required type="text" id="title" name="title" minlength="1" maxlength="30" >
+
+      <label for="author">Author</label>
+      <input required type="text" id="author" name="author" minlength="1" maxlength="50">
+
+      <label for="pages">Number of pages</label>
+      <input type="number" id="pages" name="pages">
+
+      <label for="read-state">Read?</label>
+      <input type="checkbox" id="read-state" name="read-state">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
     <div class="header">
         <div class="title-description">
             <div class="title">Library </div>
@@ -22,6 +41,7 @@
         </div>
         <button class="new-book"> Add new book </button>
     </div>  
+
 
     <div class="cards-container"></div>
     <footer> 
