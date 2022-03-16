@@ -95,7 +95,7 @@ function isInputValid (bookPages,bookReadState){
 };
 
 function addBookToLibraryList(){
-    const hi = document.querySelector('.add-book-form')
+    const hi = document.querySelector('form')
     hi.classList.toggle('active')
     const bookTitle = window.prompt("Enter the book's name: ");
     if(bookTitle === null) return null;

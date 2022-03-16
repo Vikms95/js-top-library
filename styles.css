@@ -10,19 +10,41 @@ body{
     position: relative;
 }
 
-.add-book-form{
+form{
   display: none;
   position: absolute;
   right: auto;
   left: auto;
 
   background-color:rgb(228, 245, 199) ;
-  border: .5rem solid black;
+  border: .1rem solid black;
+  grid-template: 1fr 1fr span 2 / 1fr 1fr;
 
 }
 
-.add-book-form.active{
-  display: block;
+form.active{
+  display: grid;
+}
+
+.section,button[type="submit"]{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+button[type="submit"]{
+  padding: 1rem;
+}
+
+.button-wrapper{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.section.radio{
+  flex-direction: row;
 }
 
 .header{
