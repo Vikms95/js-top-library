@@ -2,21 +2,21 @@ const cardsContainerReference = document.querySelector(".cards-container");
 const newBookButtonReference = document.querySelector(".new-book");
 
 //List of pre-included books to show the UI
-const theHobbit = new Book("Hobbit","Tolkien","310","unread");
-const harryPotter = new Book("Harry Potter","Rowling","223","read");
-const donQuijote = new Book("Don Quijote","Cervantes","594","read");
-const annaKarenina = new Book("Anna Karenina","Tolstoi","656","unread");
-const toKillAMockingbirg = new Book("To Kill a Mockingbirg","Lee","281","unread");
-const theGreatGatsby = new Book ("The Great Gatsby","Fitzgerald","218","unread");
-const oneHundredYears = new Book ("One Hundred Years of Solitude","Garcia Marquez","471","read");
-const tirantLoBlanc = new Book("Tirant Lo Blanc","Martorell","249","read");
-const murderInTheOrientExpress = new Book("Murder in The Orient Express","Christie","252","read");
-const romeoAndJuliet = new Book("Romeo and Juliet","Shakespeare","153","read");
-const laVidaEsSueno = new Book("La Vida es Sueño","Calderón de la Barca","163","read");
-const aroundTheWorldIn80Days = new Book("Around the World in 80 Days","Verne","342","read");
-const aConfederacyOfDunces = new Book("A Confederacy of Dunces","Kennedy Toole","362","unread")
-const hamlet = new Book("Hamlet","Shakespeare","104","read");
-const priceAndPrejudice = new Book("Pride and Prejudice","Austen","432","unread");
+const theHobbit = new Book("Hobbit","Tolkien","310",false);
+const harryPotter = new Book("Harry Potter","Rowling","223",true);
+const donQuijote = new Book("Don Quijote","Cervantes","594",true);
+const annaKarenina = new Book("Anna Karenina","Tolstoi","656", false);
+const toKillAMockingbirg = new Book("To Kill a Mockingbirg","Lee","281", false);
+const theGreatGatsby = new Book ("The Great Gatsby","Fitzgerald","218", false);
+const oneHundredYears = new Book ("One Hundred Years of Solitude","Garcia Marquez","471", true);
+const tirantLoBlanc = new Book("Tirant Lo Blanc","Martorell","249",true);
+const murderInTheOrientExpress = new Book("Murder in The Orient Express","Christie","252",true);
+const romeoAndJuliet = new Book("Romeo and Juliet","Shakespeare","153",true);
+const laVidaEsSueno = new Book("La Vida es Sueño","Calderón de la Barca","163",true);
+const aroundTheWorldIn80Days = new Book("Around the World in 80 Days","Verne","342",true);
+const aConfederacyOfDunces = new Book("A Confederacy of Dunces","Kennedy Toole","362",false)
+const hamlet = new Book("Hamlet","Shakespeare","104",true);
+const priceAndPrejudice = new Book("Pride and Prejudice","Austen","432",false);
 
 let myLibrary = [
 	theHobbit,
@@ -77,14 +77,12 @@ function addEventListenerNewButton(){
     newBookButtonReference.addEventListener("click", () => {
         const formDiv = document.querySelector('form')
         formDiv.classList.toggle('active')
-        // const bookToAdd = addBookToLibraryList();
-        // if(bookToAdd === null) return;
-        // updateExistingLibrary(bookToAdd);
     });
 };
 
 function addEventListenerAddBook(){
   const submitButton = document.querySelector('.form-button')
+  const formDiv = document.querySelector('form')
   submitButton.addEventListener('click',()=>{
     const bookTitle = document.getElementById('title').value
     const bookAuthor = document.getElementById('author').value
@@ -92,6 +90,7 @@ function addEventListenerAddBook(){
     const bookReadState = document.getElementById('read-state').checked
     const bookToAdd = addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState)
     updateExistingLibrary(bookToAdd)
+    formDiv.classList.toggle('active')
   })  
 }
 
@@ -126,7 +125,7 @@ function addReadButton(div,book){
       readButton.style.color = "green";
 		  return;
     }else if(book.readState === true){
-      book.readState = "unread";
+      book.readState = false;
       readButton.textContent = "Unread"
       readButton.style.color = "red";
 		  return;
@@ -135,6 +134,7 @@ function addReadButton(div,book){
 	}
     })
 };
+
 
 function addRemoveButton(div){
     const removeButton = div.appendChild(document.createElement("button"));

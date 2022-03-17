@@ -4,7 +4,9 @@
 
 <!-- - Place it in the middle of the page, still with no display -->
 
-- Change function whenever add new book is pressed to change the display of the form
+<!-- - Change function whenever add new book is pressed to change the display of the form -->
 
-- Read on functionality of button forms 
+<!-- - Read on functionality of button forms  -->
+
+- Make form dissapear when clicked
 
