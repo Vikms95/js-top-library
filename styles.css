@@ -33,7 +33,7 @@ form.active{
   padding: 1.5rem;
 }
 
-button[type="submit"]{
+button[type="button"]{
   padding: 1rem;
 }
 

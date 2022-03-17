@@ -10,3 +10,5 @@
 
 - Make form dissapear when clicked
 
+- Add constraints make all fields required
+

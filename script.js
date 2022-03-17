@@ -37,9 +37,9 @@ let myLibrary = [
 	hamlet
 ];
 
-updateExistingLibrary(myLibrary);
-addEventListenerNewButton();
-addEventListenerAddBook();
+updateExistingLibrary(myLibrary)
+addEventListenerNewButton()
+addEventListenerAddBook()
 
 function Book(title, author, pages, readState){   
     this.title = title;
@@ -84,14 +84,60 @@ function addEventListenerAddBook(){
   const submitButton = document.querySelector('.form-button')
   const formDiv = document.querySelector('form')
   submitButton.addEventListener('click',()=>{
-    const bookTitle = document.getElementById('title').value
-    const bookAuthor = document.getElementById('author').value
-    const bookPages = document.getElementById('pages').value
-    const bookReadState = document.getElementById('read-state').checked
-    const bookToAdd = addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState)
-    updateExistingLibrary(bookToAdd)
-    formDiv.classList.toggle('active')
+    if(formIsValid()){  
+      const bookTitle = document.getElementById('title').value
+      const bookAuthor = document.getElementById('author').value
+      const bookPages = document.getElementById('pages').value
+      const bookReadState = document.getElementById('read-state').checked
+      const bookToAdd = addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState)
+      updateExistingLibrary(bookToAdd)
+      formDiv.classList.toggle('active')
+      clearFormInputs()
+    }
   })  
+}
+
+function clearFormInputs(){
+  document.getElementById('title').value = ''
+  document.getElementById('author').value = ''
+  document.getElementById('pages').value = ''
+  document.getElementById('read-state').checked = false
+  
+}
+
+function formIsValid(){
+  const titleInput = document.getElementById('title')
+  const authorInput = document.getElementById('author')
+  const pagesInput = document.getElementById('pages')
+
+  titleInput.setCustomValidity('')
+  authorInput.setCustomValidity('')
+  pagesInput.setCustomValidity('')
+
+  titleInput.style.backgroundColor = 'white'
+  authorInput.style.backgroundColor = 'white'
+  pagesInput.style.backgroundColor = 'white'
+
+  if(titleInput.value === ''){
+    titleInput.setCustomValidity('The book needs a title!')
+    titleInput.reportValidity()
+    titleInput.style.backgroundColor = 'pink'
+    return false
+  }
+  if(authorInput.value === ''){
+    authorInput.setCustomValidity('The author needs a name!')
+    authorInput.reportValidity()
+    authorInput.style.backgroundColor = 'pink'
+    return false
+  }
+  
+  if(!pagesInput.checkValidity()){
+    pagesInput.setCustomValidity('The book cannot have negative pages!')
+    pagesInput.reportValidity()
+    pagesInput.style.backgroundColor = 'pink'
+    return false
+  }
+    return true
 }
 
 function addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState){
@@ -134,7 +180,6 @@ function addReadButton(div,book){
 	}
     })
 };
-
 
 function addRemoveButton(div){
     const removeButton = div.appendChild(document.createElement("button"));
