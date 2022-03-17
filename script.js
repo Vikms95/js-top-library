@@ -39,12 +39,13 @@ let myLibrary = [
 
 updateExistingLibrary(myLibrary);
 addEventListenerNewButton();
+addEventListenerAddBook();
 
 function Book(title, author, pages, readState){   
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.readState = readState;
+    this.readState = readState
     this.displayBookInfo = function(){
         return this.title 
                 + " by " + this.author 
@@ -88,7 +89,7 @@ function addEventListenerAddBook(){
     const bookTitle = document.getElementById('title').value
     const bookAuthor = document.getElementById('author').value
     const bookPages = document.getElementById('pages').value
-    const bookReadState = 'Read'
+    const bookReadState = document.getElementById('read-state').checked
     const bookToAdd = addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState)
     updateExistingLibrary(bookToAdd)
   })  
@@ -100,20 +101,6 @@ function addBookToLibraryList(bookTitle,bookAuthor,bookPages,bookReadState){
   return book;
 };
 
-// function isInputValid (bookPages,bookReadState){
-// 	if (isNaN(parseInt(bookPages))){
-// 		alert("Number of pages should be a number!");
-// 		return false;
-// 	}
-// 	else if(bookReadState.toLowerCase() !== "unread" && bookReadState.toLowerCase() !== "read"){
-// 		alert("Valid values are 'read' or 'unread'.");
-// 		return false;
-// 	}
-// 	else{
-  // 		return true;
-  // 	}
-  // };
-  
 function addBookToDiv(book){
     const div = cardsContainerReference.appendChild(document.createElement("div"));
     div.classList.add("book");
@@ -124,27 +111,27 @@ function addBookToDiv(book){
 function addReadButton(div,book){
     const readButton = div.appendChild(document.createElement("button"));
     readButton.classList.add("read-button");
-    readButton.textContent = book.readState;
-	if(book.readState == "unread"){
-		readButton.textContent = "Unread";
+    readButton.textContent = book.readState === true ? 'Read' : 'Unread' 
+	if(book.readState === false){
+		// readButton.textContent = "Unread";
 		readButton.style.color = "red";
 	}else{
-		readButton.textContent = "Read";
+		// readButton.textContent = "Read";
 		readButton.style.color = "green";
 	}
     readButton.addEventListener("click", () => {
-    if(book.readState === "unread"){
-		book.readState = "read";
-		readButton.textContent = "Read"
-        readButton.style.color = "green";
-		return;
-    }else if(book.readState === "read"){
-		book.readState = "unread";
-		readButton.textContent = "Unread"
-        readButton.style.color = "red";
-		return;
+    if(book.readState === false){
+      book.readState = true;
+      readButton.textContent = "Read"
+      readButton.style.color = "green";
+		  return;
+    }else if(book.readState === true){
+      book.readState = "unread";
+      readButton.textContent = "Unread"
+      readButton.style.color = "red";
+		  return;
     }else{
-		return;
+		  return;
 	}
     })
 };

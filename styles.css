@@ -43,7 +43,7 @@ button[type="submit"]{
   padding-bottom: 1rem;
 }
 
-.section.radio{
+.section.checkbox{
   flex-direction: row;
 }
 
