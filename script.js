@@ -113,7 +113,7 @@ function addEventListenerQuitButton(){
 //     if(formDiv.classList.contains('active') && e.target.id !== 'form'){
 //       formDiv.classList.remove('active')
 //     }
-//   })
+//   })sd
 // }
 
 function clearFormInputs(){
