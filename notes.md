@@ -8,7 +8,12 @@
 
 <!-- - Read on functionality of button forms  -->
 
-- Make form dissapear when clicked
 
-- Add constraints make all fields required
+<!-- - Add constraints make all fields required -->
+
+- Add quit button
+
+- Make form dissapear when click outside of form
+
+- Make outside of form unclickable when form is in front
 

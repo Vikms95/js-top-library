@@ -39,7 +39,9 @@ let myLibrary = [
 
 updateExistingLibrary(myLibrary)
 addEventListenerNewButton()
-addEventListenerAddBook()
+addEventListenerAddBookButton()
+addEventListenerQuitButton()
+// addEventListenerRemoveForm()
 
 function Book(title, author, pages, readState){   
     this.title = title;
@@ -80,7 +82,7 @@ function addEventListenerNewButton(){
     });
 };
 
-function addEventListenerAddBook(){
+function addEventListenerAddBookButton(){
   const submitButton = document.querySelector('.form-button')
   const formDiv = document.querySelector('form')
   submitButton.addEventListener('click',()=>{
@@ -96,6 +98,23 @@ function addEventListenerAddBook(){
     }
   })  
 }
+
+function addEventListenerQuitButton(){
+  const quitButton = document.querySelector('.quit-button')
+  const formDiv = document.querySelector('form')
+  quitButton.addEventListener('click', () =>{
+    formDiv.classList.toggle('active')
+  })
+}
+
+// function addEventListenerRemoveForm(){
+//   let formDiv = document.querySelector('form')
+//   document.addEventListener('click', (e) =>{
+//     if(formDiv.classList.contains('active') && e.target.id !== 'form'){
+//       formDiv.classList.remove('active')
+//     }
+//   })
+// }
 
 function clearFormInputs(){
   document.getElementById('title').value = ''
@@ -117,17 +136,22 @@ function formIsValid(){
   titleInput.style.backgroundColor = 'white'
   authorInput.style.backgroundColor = 'white'
   pagesInput.style.backgroundColor = 'white'
+  titleInput.style.border = '1px solid black'
+  authorInput.style.border = '1px solid black'
+  pagesInput.style.border = '1px solid black'
 
   if(titleInput.value === ''){
     titleInput.setCustomValidity('The book needs a title!')
     titleInput.reportValidity()
     titleInput.style.backgroundColor = 'pink'
+    titleInput.style.border = '1px solid red'
     return false
   }
   if(authorInput.value === ''){
     authorInput.setCustomValidity('The author needs a name!')
     authorInput.reportValidity()
     authorInput.style.backgroundColor = 'pink'
+    authorInput.style.border = '1px solid red'
     return false
   }
   
@@ -135,6 +159,7 @@ function formIsValid(){
     pagesInput.setCustomValidity('The book cannot have negative pages!')
     pagesInput.reportValidity()
     pagesInput.style.backgroundColor = 'pink'
+    pagesInput.style.border = '1px solid red'
     return false
   }
     return true
